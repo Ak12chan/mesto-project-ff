@@ -8,8 +8,6 @@ export const placesList = document.querySelector('.places__list');
 const closeButtons = document.querySelectorAll('.popup__close');
 
 
-const openlink = document.querySelector('.popup__image');
-
 const openImageName = document.querySelector('.popup__caption');
 
 closeButtons.forEach((button) => {
@@ -18,13 +16,16 @@ closeButtons.forEach((button) => {
     });
 });
 
-function openModalImage({link, name}, modal) {
+const openImage = document.querySelector('.popup__image');
 
-    openlink.src = link;
+const popupImage = document.querySelector('.popup_type_image');
+
+function openModalImage({link, name}) {
+    openImage.src = link;
     openImageName.textContent = name;
     openImageName.alt = name;
 
-    openModal(modal);
+    openModal(popupImage);
 }
 
 initialCards.forEach((cardElement) => {

@@ -8,7 +8,6 @@ function getCardElement() {
     return templateCard.querySelector('.card').cloneNode(true);
 }
 
-const popupImage = document.querySelector('.popup_type_image');
 
 function removeCard(card) {
     card.remove();
@@ -36,7 +35,7 @@ function createCard({name, link}, removeCard, openModalImage, likeCard) {
         });
 
     cardImage.addEventListener('click', () => {
-        openModalImage({name, link}, popupImage);
+        openModalImage({name, link});
     });
 
     const likesContainer = cardElement.querySelector('.card__description');
