@@ -43,11 +43,8 @@ const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
 profileEditButton.addEventListener('click', () => {
-    profileNameInput.value =
-        document.querySelector('.profile__title').textContent;
-    profileJobInput.value = document.querySelector(
-        '.profile__description'
-    ).textContent;
+    profileNameInput.value = profileTitle.textContent;
+    profileJobInput.value = profileDescription.textContent;
     openModal(popupEditProfile);
 });
 
