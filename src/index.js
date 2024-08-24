@@ -56,6 +56,9 @@ const popupDeleteCard = document.querySelector('.popup_type_delete-card');
 const profileTitle = document.querySelector('.profile__title');
 const profileDescription = document.querySelector('.profile__description');
 
+const popupButton = popupEditProfile.querySelector('.popup__button');
+const submitButton = popupAvatar.querySelector('.popup__button');
+
 profileEditButton.addEventListener('click', () => {
   profileNameInput.value = profileTitle.textContent;
   profileJobInput.value = profileDescription.textContent;
@@ -84,8 +87,7 @@ function renderLoading(isLoading, button) {
 
 function handleEditFormSubmit(evt) {
   evt.preventDefault(); // Отмена стандартной отправки формы
-  const button = popupEditProfile.querySelector('.popup__button');
-  renderLoading(true, button);
+  renderLoading(true, popupButton);
 
   editUserInfo({
     name: profileNameInput.value,
@@ -99,7 +101,7 @@ function handleEditFormSubmit(evt) {
     .catch((err) => {
       console.log(err); // выводим ошибку в консоль
     })
-    .finally(() => renderLoading(false, button));
+    .finally(() => renderLoading(false, popupButton));
 }
 
 editProfileFormElement.addEventListener('submit', handleEditFormSubmit);
@@ -111,8 +113,7 @@ const placeLinkInput = newPlaceFormElement.elements.link;
 
 function handleAddFormSubmit(evt) {
   evt.preventDefault();
-  const button = popupAddCard.querySelector('.popup__button');
-  renderLoading(true, button);
+  renderLoading(true, popupButton);
   addNewCard({
     name: placeNameInput.value,
     link: placeLinkInput.value,
@@ -126,7 +127,7 @@ function handleAddFormSubmit(evt) {
           openModalImage,
           popupImage,
           handleLikeCard,
-          handleDeleteCard
+          handleModalWindow
         )
       );
       clearValidation(newPlaceFormElement, validationConfig);
@@ -135,7 +136,7 @@ function handleAddFormSubmit(evt) {
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => renderLoading(false, button));
+    .finally(() => renderLoading(false, popupButton));
 }
 
 newPlaceFormElement.addEventListener('submit', handleAddFormSubmit);
@@ -147,7 +148,6 @@ const avatarLinkInput = editAvatarFormElement.elements.link;
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
-  const submitButton = popupAvatar.querySelector('.popup__button');
   renderLoading(true, submitButton);
 
   editAvatar({
@@ -168,7 +168,7 @@ editAvatarFormElement.addEventListener('submit', handleAvatarFormSubmit);
 
 const deleteCardFormElement = document.forms['delete-card'];
 
-function handleDeleteCard(cardElement, _id) {
+function handleModalWindow(cardElement, _id) {
   openModal(popupDeleteCard);
   currentCardId = _id;
   currentCard = cardElement;
@@ -209,7 +209,7 @@ Promise.all([getUserInfo(), getInitialCards()])
         openModalImage,
         popupImage,
         handleLikeCard,
-        handleDeleteCard
+        handleModalWindow
       );
       placesList.append(newCard);
     });
