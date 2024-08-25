@@ -127,7 +127,7 @@ function handleAddFormSubmit(evt) {
           openModalImage,
           popupImage,
           handleLikeCard,
-          handleModalWindowCard
+            popupDeleteHandler
         )
       );
       clearValidation(newPlaceFormElement, validationConfig);
@@ -168,7 +168,7 @@ editAvatarFormElement.addEventListener('submit', handleAvatarFormSubmit);
 
 const deleteCardFormElement = document.forms['delete-card'];
 
-function handleModalWindowCard(cardElement, _id) {
+function popupDeleteHandler(cardElement, _id) {
     openModal(popupDeleteCard);
     currentCardId = _id;
     currentCard = cardElement;
@@ -209,7 +209,7 @@ Promise.all([getUserInfo(), getInitialCards()])
         openModalImage,
         popupImage,
         handleLikeCard,
-        handleModalWindowCard
+          popupDeleteHandler
       );
       placesList.append(newCard);
     });
